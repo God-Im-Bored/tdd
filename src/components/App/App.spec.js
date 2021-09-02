@@ -17,7 +17,7 @@ describe('App', () => {
         expect(wrapper.find('div').length).toEqual(1)
     })
 
-    it('should contain child component Calculator', () => {
+    it('should render child component Calculator', () => {
         expect(wrapper.containsMatchingElement(<Calculator />)).toEqual(true)
     })
 })
