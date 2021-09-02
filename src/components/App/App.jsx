@@ -4,7 +4,7 @@ import Calculator from '../Calculator/Calculator.jsx'
 
 const App = () => {
     return (
-        <div id='app-container'>
+        <div className='app-container'>
             <Calculator />
         </div>
         
