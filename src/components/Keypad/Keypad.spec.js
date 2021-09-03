@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Keypad from './Keypad'
+import './Keypad.css'
 
 describe('Keypad', () => {
     let wrapper 
@@ -13,6 +14,10 @@ describe('Keypad', () => {
         numbers={[]}
         operators={[]}
       />))
+
+      it('should render an instance of the Key component', () => {
+          expect(wrapper.find('Key').length).toEqual(1)
+      })
 
       it('should render the values of numbers', () => {
         wrapper.setProps({ numbers: ['0', '1', '2']})
