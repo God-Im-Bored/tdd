@@ -11,4 +11,7 @@
     color: var(--display-text-color);
     font-size: var(--display-text-size);
     font-family: var(--main-font);
+    font-weight: var(--display-text-weight);
+    margin-left: auto;
+    overflow: hidden;
 }

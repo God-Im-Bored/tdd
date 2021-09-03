@@ -12,6 +12,9 @@
   /* font sizes */
   --display-text-size: 4em;
 
+  /* font weights */
+  --display-text-weight: 400;
+
   /* calculator dimensions */
   --calculator-height: 72%;
   --calculator-width: 36%;
