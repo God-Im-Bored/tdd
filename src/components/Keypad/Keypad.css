@@ -1,28 +1,28 @@
 .keypad-container {
     display: flex;
-    height: var(--keypad-height);
-    width: var(--keypad-width);
     flex-direction: row;
     flex-wrap: wrap;
+    height: var(--keypad-height);
     padding: 2%;
-}
-
-.numbers-container {
+    width: var(--keypad-width);
+  }
+  
+  .numbers-container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     height: 80%;
     width: 75%;
-}
-
-.operators-container {
+  }
+  
+  .operators-container {
     display: flex;
     flex-direction: column;
     height: 80%;
     width: 25%;
-}
-
-.sbumit-container {
+  }
+  
+  .submit-container {
     height: 20%;
     width: 100%;
-}
+  }
