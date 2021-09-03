@@ -1,35 +1,62 @@
-import React from 'react'
-import { shallow } from 'enzyme'
+import React from "react";
+import { shallow, mount } from "enzyme";
 
-import Keypad from './Keypad'
-import './Keypad.css'
+import Keypad from "./Keypad";
+import "./Keypad.css";
 
-describe('Keypad', () => {
-    let wrapper 
+describe("Keypad", () => {
+  let wrapper;
 
-    beforeEach(() => wrapper = shallow(  <Keypad
-        callOperator={jest.fn()}
-        setOperator={jest.fn()}
-        updateDisplay={jest.fn()} 
-        numbers={[]}
-        operators={[]}
-      />))
+  beforeEach(
+    () =>
+      (wrapper = shallow(
+        <Keypad
+          callOperator={jest.fn()}
+          setOperator={jest.fn()}
+          updateDisplay={jest.fn()}
+          numbers={[]}
+          operators={[]}
+        />
+      ))
+  );
 
-      it('should render an instance of the Key component', () => {
-          expect(wrapper.find('Key').length).toEqual(1)
-      })
+  it("should render 4 <div />s", () => {
+    expect(wrapper.find("div").length).toEqual(4);
+  });
 
-      it('should render the values of numbers', () => {
-        wrapper.setProps({ numbers: ['0', '1', '2']})
-        expect(wrapper.find('.numbers-container').text()).toEqual('012')
-      })
+  it("should render an instance of the Key component for each index of numbers, operators, and the submit key", () => {
+    const numbers = ["0", "1"];
+    const operators = ["+", "-"];
+    const submit = 1;
+    const keyTotal = numbers.length + operators.length + submit;
+    wrapper.setProps({ numbers, operators });
+    expect(wrapper.find("Key").length).toEqual(keyTotal);
+  });
+});
 
-      it('should render the values of operators', () => {
-          wrapper.setProps({ operators: ['+', '-', '*', '/']})
-          expect(wrapper.find('.operators-container').text()).toEqual('+-*/')
-      })
+describe("mounted Keypad", () => {
+  let wrapper;
 
-    it('should render 3 <div />s', () => {
-        expect(wrapper.find('div').length).toEqual(3)
-    })
-})
+  beforeEach(
+    () =>
+      (wrapper = mount(
+        <Keypad
+          callOperator={jest.fn()}
+          setOperator={jest.fn()}
+          updateDisplay={jest.fn()}
+          numbers={[]}
+          operators={[]}
+        />
+      ))
+  );
+
+  it("should render the values of numbers to the DOM", () => {
+    wrapper.setProps({ numbers: ["0", "1", "2"] });
+    expect(wrapper.find(".numbers-container").text()).toEqual("012");
+  });
+
+  it("should render the values of operators to the DOM", () => {
+    wrapper.setProps({ operators: ["+", "-", "*", "/"] });
+    expect(wrapper.find(".operators-container").text()).toEqual("+-*/");
+  });
+});
