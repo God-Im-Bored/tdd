@@ -6,8 +6,8 @@ import Keypad from '../Keypad/Keypad'
 class Calculator extends Component {
   state = {
     displayValue: "0",
-    numbers: [],
-    operators: [],
+    numbers: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '.', '0', 'ce'],
+    operators: ['+', '-', '*', '/'],
     selectedOperator: "",
     storedValue: "",
   };
@@ -20,8 +20,26 @@ class Calculator extends Component {
     console.log("set operation");
   };
 
-  updateDisplay = () => {
+  updateDisplay = (value) => {
     console.log("update display");
+
+    let { displayValue } = this.state;
+
+    if (value === '.' && displayValue.includes('.')) {
+      value = ''
+    }
+
+    if (value === 'ce') {
+      displayValue = displayValue.substring(0, displayValue.length - 1)
+
+      if(displayValue === '') displayValue = '0'
+    } else {
+      displayValue === '0' ? displayValue = value : displayValue += value
+    }
+
+    this.setState({displayValue})
+
+
   };
 
   render = () => {
