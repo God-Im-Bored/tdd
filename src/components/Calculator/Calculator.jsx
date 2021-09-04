@@ -21,7 +21,7 @@ class Calculator extends Component {
   };
 
   updateDisplay = (value) => {
-    console.log("update display");
+    
 
     let { displayValue } = this.state;
 

@@ -59,3 +59,82 @@ describe('mounted Calculator', () => {
         expect(spy).toHaveBeenCalledTimes(1)
     })
 })
+
+describe('updateDisplay', () => {
+    let wrapper 
+
+    beforeEach(() => wrapper = shallow(<Calculator />))
+
+    it('updates displayValue', () => {
+        wrapper.instance().updateDisplay('0')
+        expect(wrapper.state('displayValue')).toEqual('0')
+    })
+
+    it('concatenates input value onto displayValue', () => {
+        wrapper.instance().updateDisplay('5')
+        expect(wrapper.state('displayValue')).toEqual('5')
+        wrapper.instance().updateDisplay('0')
+        expect(wrapper.state('displayValue')).toEqual('50')
+    })
+
+    it('deletes the last character when ce is clicked or renders 0 if empty', () => {
+        wrapper.instance().updateDisplay('ce')
+        expect(wrapper.state('displayValue')).toEqual('0')
+    })
+
+    it('removes the last character when ce is clicked', () => {
+        wrapper.instance().updateDisplay('1')
+        expect(wrapper.state('displayValue')).toEqual('1')
+        wrapper.instance().updateDisplay('4')
+        wrapper.instance().updateDisplay('7')
+        wrapper.instance().updateDisplay('ce')
+        expect(wrapper.state('displayValue')).toEqual('14')
+    })
+
+    it('prevents multiples leading zeros', () => {
+        wrapper.instance().updateDisplay('0')
+        wrapper.instance().updateDisplay('0')
+        expect(wrapper.state('displayValue')).toEqual('0')
+    })
+
+    it('prevents multiple uses of .', () => {
+        wrapper.instance().updateDisplay('1')
+        wrapper.instance().updateDisplay('.')
+        wrapper.instance().updateDisplay('.')
+        wrapper.instance().updateDisplay('4')
+        expect(wrapper.state('displayValue')).toEqual('1.4')
+    })
+})
+
+describe('setOperator', () => {
+    let wrapper;
+
+    beforeEach(() => wrapper = shallow(<Calculator />))
+
+    it('updates the value of selectedOperator', () => {
+        wrapper.instance().setOperator('+')
+        expect(wrapper.state('selectedOperator')).toEqual('+')
+        wrapper.instance().setOperator('/')
+        expect(wrapper.state('selectedOperator')).toEqual('/')
+    })
+
+    it('updates the value of storedValue', () => {
+        wrapper.setState({ displayValue: '1'})
+        wrapper.instance().setOperator('+')
+        expect(wrapper.state('storedValue')).toEqual('1')
+    })
+
+    it('updates the value of displayValue to 0', () => {
+        wrapper.setstate({ displayvalue: '3'})
+        wrapper.instance().setOperator('-')
+        expect(wrapper.state('displayValue')).toEqual('0')
+    })
+
+    it('selectedOperator is an empty string, does not update storedValue', () => {
+        wrapper.setState({ displayValue: '1' })
+        wrapper.instance().setOperator('+')
+        expect(wrapper.state('storedValue')).toEqual('1')
+        wrapper.instance().setOperator('-')
+        expect(wrapper.state('storedValue')).toEqual('1')
+    })
+})
