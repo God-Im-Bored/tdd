@@ -125,7 +125,7 @@ describe('setOperator', () => {
     })
 
     it('updates the value of displayValue to 0', () => {
-        wrapper.setstate({ displayvalue: '3'})
+        wrapper.setState({ displayvalue: '3'})
         wrapper.instance().setOperator('-')
         expect(wrapper.state('displayValue')).toEqual('0')
     })
